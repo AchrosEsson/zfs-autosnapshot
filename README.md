@@ -36,6 +36,11 @@ Schritte:
 
 12. Es werden alte Snapshots gelöscht:
     - Snapshots im Quellpool ("rpool"), die älter als eine Woche sind.
+   
+Anmerkungen:
+-----------
+
+- Es sollte darauf geachtet werden, dass bei erstmaligem Ausführen Zeile 91 auskommentiert wird, um ein Vollständiges Replikat des Quell-Dateisystems auf dem Zielpool zu erstellen.
     - Snapshots im Ziel-Pool ("storage"), die älter als 6 Monate sind.
 
 13. Eine E-Mail-Benachrichtigung mit Informationen über gelöschte Snapshots wird gesendet.
