@@ -35,8 +35,8 @@ Schritte:
 9. Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und den Namen des letzten gesendeten Snapshots gesendet.
 
 10. Es werden alte Snapshots gelöscht:
-    - Snapshots im Quellpool ("rpool"), die älter als eine Woche sind.
-    - Snapshots im Ziel-Pool ("storage"), die älter als 6 Monate sind.
+    - Snapshots im Quellpool ("rpool"), die älter als 1 Monat sind.
+    - Snapshots im Ziel-Pool ("storage"), die älter als 1 Jahr sind.
 
 11. Eine E-Mail-Benachrichtigung mit Informationen über gelöschte Snapshots wird gesendet.
 
