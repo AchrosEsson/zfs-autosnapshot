@@ -116,11 +116,11 @@ echo
 # Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und den Namen des letzten gesendeten Snapshots gesendet
 printf '%s\n' 'alle zfs-snapshots wurden erfolgreich erstellt und übertragen' 'letzter gesendeter snaphot:' "$SNAPCHECK_OUTPUT" | mail -s "Zfs Send INFO" "$EMAIL"
 
-# Lösche alle Snapshots im Quellpool älter als eine Woche1
-/usr/bin/zfs-prune-snapshots 1w "$SOURCE_POOL" > zfs-destroyed-snapshots.log
+# Lösche alle Snapshots im Quellpool älter als 1 Monat
+/usr/bin/zfs-prune-snapshots 1M "$SOURCE_POOL" > zfs-destroyed-snapshots.log
 
-# Lösche alle Snapshots im Zielpool älter als 6 Monate
-/usr/bin/zfs-prune-snapshots 6M "$DEST_POOL" >> zfs-destroyed-snapshots.log
+# Lösche alle Snapshots im Zielpool älter als 1 Jahr
+/usr/bin/zfs-prune-snapshots 1y "$DEST_POOL" >> zfs-destroyed-snapshots.log
 
 # Eine E-Mail-Benachrichtigung mit Informationen über gelöschte Snapshots wird gesendet
 DESTROYED_OUTPUT=$(cat "$DESTROYED_LOG")
