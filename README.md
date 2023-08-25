@@ -1,3 +1,6 @@
+ZFS Auto-Snapshot
+===================
+
 Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Verwaltung von ZFS-Snapshots zwischen verschiedenen ZFS-Pools.
 Insgesamt handelt es sich um ein Skript, das ZFS-Snapshots erstellt, überträgt, überwacht und alte Snapshots verwaltet,
 während es Benachrichtigungen über den Prozess per E-Mail verschickt.
