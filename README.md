@@ -21,7 +21,7 @@ Schritte:
 
 4. Wenn ein letzter gesendeter Snapshot vorhanden ist:
 
-    - Es wird ein inkrementeller Snapshot zwischen dem letzten gesendeten Snapshot und dem neuen Snapshot erstellt.
+    - Wird ein inkrementeller Snapshot zwischen dem letzten gesendeten Snapshot und dem neuen Snapshot erstellt.
     - Der neu erstellte inkrementelle Snapshot wird an den Ziel-Pool gesendet.
 
 5. Wenn kein letzter gesendeter Snapshot vorhanden ist, wird eine E-Mail-Benachrichtigung gesendet und das Skript beendet.
