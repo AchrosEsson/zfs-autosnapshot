@@ -10,6 +10,9 @@ Benötigt das Paket "zfs-prune-snapshots":
 
 Es wird bei der ausführung automatisch installiert.
 
+Schritte:
+--------
+
 1. Es werden die Namen der Quell- und Ziel-Pools sowie Dateipfade für Snapshot-Informationen definiert.
 
 2. Der Name des zuletzt gesendeten Snapshots wird aus der angegebenen Datei "last-snapshot.md" gelesen.
