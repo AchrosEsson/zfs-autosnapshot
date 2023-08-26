@@ -88,7 +88,7 @@ else
 #               |                  !! BEIM ERSTEN AUSFÜHREN AUSKOMMENTIEREN !!                |
 #               |                                                                             |
 #               |      # Senden des gesamten Snapshot, falls dies der erste Snapshot ist      |
-        ### <-- |      zfs send -R "$new_snapshot" | zfs receive "$DEST_POOL"                 |
+        ### <-- |      zfs send -R "$new_snapshot" | zfs receive "$DEST_POOL" -F              |
 #               |                                                                             |
 #                 ---------------------------------------------------------------------------
 
