@@ -113,7 +113,7 @@ echo " letzter gesendeter snaphot:"
 echo " $SNAPCHECK_OUTPUT"
 echo
 
-# Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und den Namen des letzten gesendeten Snapshots gesendet
+# Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und dem Namen des letzten gesendeten Snapshots gesendet
 printf '%s\n' 'alle zfs-snapshots wurden erfolgreich erstellt und übertragen' 'letzter gesendeter snaphot:' "$SNAPCHECK_OUTPUT" | mail -s "Zfs Send INFO" "$EMAIL"
 
 # Lösche alle inkrementellen Snapshots im Quellpool älter als 1 Monat
