@@ -308,7 +308,11 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
             git clone https://github.com/bahamas10/zfs-prune-snapshots.git "$absolute_dir"
 
             # Kopiere die Datei in /usr/bin/
-            sudo cp -r "$absolute_dir/zfs-prune-snapshots" /usr/bin/
+            [ $(id -u) -eq 0 ] && {
+                cp -r "$absolute_dir/zfs-prune-snapshots" /usr/bin/
+            } || {
+                sudo cp -r "$absolute_dir/zfs-prune-snapshots" /usr/bin/
+            }
 
             # Prüfe, ob das Kommando nun verfügbar ist
             if command -v zfs-prune-snapshots &>/dev/null; then
