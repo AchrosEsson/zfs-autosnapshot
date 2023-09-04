@@ -243,26 +243,43 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
                 if ! command -v git &>/dev/null; then
                     echo "Git ist nicht installiert. Installiere Git..."
 
-                    # Funktion zur Installation von Paketen mit apt
+                if [ $(id -u) -eq 0 ]; then
+                    # Als Root-Benutzer ausführen
+                    install_with_apt() {
+                        apt-get update
+                        apt-get install -y git
+                    }
+                
+                    install_with_dnf() {
+                        dnf install -y git
+                    }
+                
+                    install_with_yum() {
+                        yum install -y git
+                    }
+                
+                    install_with_pkg() {
+                        pkg install -y git
+                    }
+                else
+                    # Als nicht-Root-Benutzer ausführen (mit sudo)
                     install_with_apt() {
                         sudo apt-get update
                         sudo apt-get install -y git
                     }
-
-                    # Funktion zur Installation von Paketen mit dnf
+                
                     install_with_dnf() {
                         sudo dnf install -y git
                     }
-
-                    # Funktion zur Installation von Paketen mit yum
+                
                     install_with_yum() {
                         sudo yum install -y git
                     }
-
-                    # Funktion zur Installation von Paketen mit pkg (FreeBSD)
+                
                     install_with_pkg() {
                         sudo pkg install -y git
                     }
+                fi
 
                     # Erkennen des Paketmanagers und Ausführung der entsprechenden Installationsroutine
                     if command -v apt-get >/dev/null 2>&1; then
