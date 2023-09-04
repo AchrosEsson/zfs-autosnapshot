@@ -407,13 +407,19 @@ zfs list -t snapshot -o name,creation -s creation | grep "$DEST_POOL" | tail -n 
 SNAPCHECK_OUTPUT=$(cat "$SNAPCHECK")
 
 # Nachricht an die Komandozeile
+if [ "$first_snapshot" = true ]; then
+        snapshot_list=$(zfs list -t snapshot)
+        printf '%s\n' 'ein vollständiger zfs-snapshot wurde erfolgreich erstellt und übertragen:' "$snapshot_list"\n"
+    else
+        printf '%s\n' 'alle zfs-snapshots wurden erfolgreich erstellt und übertragen' 'letzter gesendeter snaphot:' "$SNAPCHECK_OUTPUT"\n"
+    fi
+
 echo -e "\nalle snapshots wurden erfolgreich erstellt und an den Zielpool gesendet.\n\nletzter gesendeter Snapshot:\n"$SNAPCHECK_OUTPUT""
 
 # Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und dem Namen 
 # des letzten gesendeten Snapshots gesendet, wenn eine E-Mail-Adresse definiert wurde.
 if [[ -n "$EMAIL_ADDRESS" ]]; then
     if [ "$first_snapshot" = true ]; then
-        snapshot_list=$(zfs list -t snapshot)
         printf '%s\n' 'ein vollständiger zfs-snapshot wurde erfolgreich erstellt und übertragen:' "$snapshot_list" | mail -s "Zfs Send INFO" "$EMAIL_ADDRESS\n"
     else
         printf '%s\n' 'alle zfs-snapshots wurden erfolgreich erstellt und übertragen' 'letzter gesendeter snaphot:' "$SNAPCHECK_OUTPUT" | mail -s "Zfs Send INFO" "$EMAIL_ADDRESS\n"
