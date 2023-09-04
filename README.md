@@ -5,44 +5,36 @@ Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Ve
 Insgesamt handelt es sich um ein Skript, das ZFS-Snapshots erstellt, überträgt, überwacht und alte Snapshots verwaltet,
 während es Benachrichtigungen über den Prozess per E-Mail verschickt.
 
-Benötigt das Paket "zfs-prune-snapshots":
-'https://github.com/bahamas10/zfs-prune-snapshots.git'
+## Anforderungen
+- [zfs-prune-snapshots](https://github.com/bahamas10/zfs-prune-snapshots.git): Dieses Paket wird automatisch während der Ausführung installiert.
 
-Es wird bei der ausführung automatisch installiert.
+## Autor
+- Manuel Hampel <hampel.manuel@protonmail.com>
 
-Schritte:
---------
+## Datum
+- 25. August 2023
 
-1. Es werden die Namen der Quell- und Ziel-Pools sowie Dateipfade für Snapshot-Informationen definiert.
+## Version
+- 2.1.3
 
-2. Der Name des zuletzt gesendeten Snapshots wird aus der angegebenen Datei "last-snapshot.md" gelesen.
+## Konfiguration
+- Das Skript speichert Konfigurationsdateien im Verzeichnis `$HOME/.config/zfs-autosnapshot`.
 
-3. Ein neuer inkrementeller Snapshot wird für den Quellpool erstellt, dessen Name das aktuelle Datum und die Uhrzeit enthält.
+## Beschreibung
+Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Verwaltung von ZFS-Snapshots. Es bietet folgende Funktionen:
+- Erstellung von vollständigen und inkrementellen Snapshots eines ZFS-Quell-Pools.
+- Übertragung von Snapshots auf einen Zielpool.
+- Überwachung und Verwaltung von Snapshots, einschließlich der Löschung alter Snapshots.
+- Senden von E-Mail-Benachrichtigungen während des Prozesses.
 
-4. Wenn ein letzter gesendeter Snapshot vorhanden ist:
+## Verwendungshinweise
+1. Führen Sie das Skript mit der Option `-config` aus, um die Einstellungen interaktiv zu konfigurieren.
+2. Wählen Sie den Quell- und Zielpool aus.
+3. Definieren Sie das Verzeichnis für die Protokollierung, die Lebensdauer der Snapshots und die E-Mail-Einstellungen (optional).
+4. Bestätigen Sie die Einstellungen.
+5. Das Skript erstellt und verwaltet Snapshots und überträgt sie zwischen den Pools.
+6. Es entfernt auch alte Snapshots gemäß den angegebenen Lebensdauern.
 
-    - Wird ein inkrementeller Snapshot zwischen dem letzten gesendeten Snapshot und dem neuen Snapshot erstellt.
-    - Der neu erstellte inkrementelle Snapshot wird an den Ziel-Pool gesendet.
+## Hinweise
+Für detaillierte Verwendungshinweise und Optionen finden Sie in den Kommentaren im Skript.
 
-5. Wenn kein letzter gesendeter Snapshot vorhanden ist, wird eine E-Mail-Benachrichtigung gesendet und das Skript beendet.
-
-6. Der Name des neuen Snapshots wird in der Datei "last-snapshot.md" gespeichert.
-
-7. Der Name des aktuellsten Snapshots im Ziel-Pool wird in die Datei "zfs-snapcheck.log" geschrieben.
-
-8. Der Name des aktuellsten Snapshots wird aus der Datei "zfs-snapcheck.log" gelesen und angezeigt.
-
-9. Eine E-Mail wird mit Informationen über erfolgreich gesendete Snapshots und den Namen des letzten gesendeten Snapshots gesendet.
-
-10. Es werden alte Snapshots gelöscht:
-    - Snapshots im Quellpool ("rpool"), die älter als 1 Monat sind.
-    - Snapshots im Ziel-Pool ("storage"), die älter als 1 Jahr sind.
-
-11. Eine E-Mail-Benachrichtigung mit Informationen über gelöschte Snapshots wird gesendet.
-
-12. Das Skript wird beendet.
-
-Anmerkungen:
------------
-
-- Es sollte darauf geachtet werden, dass bei erstmaligem Ausführen Zeile 91 auskommentiert wird, um ein Vollständiges Replikat des Quell-Dateisystems auf dem Zielpool zu erstellen.
