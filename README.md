@@ -5,23 +5,7 @@ Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Ve
 Insgesamt handelt es sich um ein Skript, das ZFS-Snapshots erstellt, überträgt, überwacht und alte Snapshots verwaltet,
 während es Benachrichtigungen über den Prozess per E-Mail verschickt.
 
-## Anforderungen
-- [zfs-prune-snapshots](https://github.com/bahamas10/zfs-prune-snapshots.git): Dieses Paket wird automatisch während der Ausführung installiert.
-
-## Autor
-- Manuel Hampel <hampel.manuel@protonmail.com>
-
-## Datum
-- 25. August 2023
-
-## Version
-- 2.1.3
-
-## Konfiguration
-- Das Skript speichert Konfigurationsdateien im Verzeichnis `$HOME/.config/zfs-autosnapshot`.
-
 ## Beschreibung
-Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Verwaltung von ZFS-Snapshots. Es bietet folgende Funktionen:
 - Erstellung von vollständigen und inkrementellen Snapshots eines ZFS-Quell-Pools.
 - Übertragung von Snapshots auf einen Zielpool.
 - Überwachung und Verwaltung von Snapshots, einschließlich der Löschung alter Snapshots.
@@ -34,6 +18,9 @@ Dieses Bash-Skript automatisiert den Prozess der Erstellung, Übertragung und Ve
 4. Bestätigen Sie die Einstellungen.
 5. Das Skript erstellt und verwaltet Snapshots und überträgt sie zwischen den Pools.
 6. Es entfernt auch alte Snapshots gemäß den angegebenen Lebensdauern.
+
+## Konfiguration
+- Das Skript speichert Konfigurationsdateien im Verzeichnis `$HOME/.config/zfs-autosnapshot`.
 
 ## Hinweise
 Für detaillierte Verwendungshinweise und Optionen finden Sie in den Kommentaren im Skript.
