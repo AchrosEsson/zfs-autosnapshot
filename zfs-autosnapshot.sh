@@ -22,7 +22,7 @@ FIRST_RUN_FLAG="$CONFIG_DIR/zfs_first_run"
 if [ -f "$CONFIG_FILE" ]; then
     source "$CONFIG_FILE"
 else
-    mkdir "$CONFIG_DIR"
+    mkdir -p "$CONFIG_DIR"
 fi
 
 # Überprüfen, ob das Log-Verzeichnis existiert, wenn das Skript nicht zum ersten Mal ausgeführt wird
