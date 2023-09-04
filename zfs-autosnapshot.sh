@@ -142,9 +142,6 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
     read -p "Lebenszeit der Quellpool-Snapshots: " SOURCE_SNAP_LIFETIME
     read -p "Lebenszeit der Zielpool-Snapshots: " DEST_SNAP_LIFETIME
 
-
-
-
     # Frage den Benutzer, ob E-Mails gesendet werden sollen
     while true; do
         echo
@@ -166,9 +163,6 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
             echo -e "\nUngültige Eingabe. Bitte geben Sie 'y' oder 'n' ein."
         fi
     done
-
-
-
 
     # Ausgabe der Variablen
     echo -e "\nQuell-Pool: $SOURCE_POOL"
