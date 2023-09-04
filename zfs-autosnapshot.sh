@@ -12,7 +12,6 @@
 # Datum: August 25, 2023
 # Version: 2.1.3
 
-
 # Definieren des Speicherorts für die letzten Konfigurationsdateien
 CONFIG_DIR="$HOME/.config/zfs-autosnapshot"
 CONFIG_FILE="$CONFIG_DIR/zfs_config.conf"
