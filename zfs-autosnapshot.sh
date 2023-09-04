@@ -67,7 +67,19 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
     # Überprüfen, ob das Config-Mode aktiv ist
     if [ "$CONFIG_MODE" = true ]; then
         echo -e "\nBitte konfigurieren Sie die Einstellungen erneut.\n\nIhre vorherige Einstellungen:\n"
-        cat $CONFIG_FILE
+        
+        # Ausgabe der vorherigen Einstellungen
+        echo "Quell-Pool: $SOURCE_POOL"
+        echo "Ziel-Pool: $DEST_POOL"
+        echo "Log-Verzeichnis: $LOG_DIR"
+        echo "Pfad zur Log-Datei für den letzten Snapshot: $LAST_SNAPSHOT"
+        echo "Pfad zur Log-Datei für gelöschte Snapshots: $DESTROYED_LOG"
+        echo "Pfad zur Log-Datei für Snapshot-Checks: $SNAPCHECK"
+        echo "Lebenszeit der Quellpool-Snapshots: $SOURCE_SNAP_LIFETIME"
+        echo "Lebenszeit der Zielpool-Snapshots: $DEST_SNAP_LIFETIME"
+        if [[ -n "$EMAIL_ADDRESS" ]]; then
+            echo "E-Mail-Adresse: $EMAIL_ADDRESS"
+        fi
     fi
 
     # Zeige die verfügbaren ZFS-Pools mit Nummern an
@@ -79,7 +91,7 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
         exit 1
     fi
 
-    echo -e "Verfügbare ZFS-Pools:\n"
+    echo -e "\nVerfügbare ZFS-Pools:\n"
     for i in "${!pools[@]}"; do
         echo "$i. ${pools[$i]}"
     done
@@ -150,9 +162,9 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
         if [[ "$send_emails" == "y" || "$send_emails" == "Y" ]]; then
             # Frage nach der E-Mail-Adresse
             echo
-            read -p "Geben Sie Ihre E-Mail-Adresse ein: " EMAIL_ADDRESS
+            read -p "Geben Sie Ihre E-Mail-Adresse ein: " TEMP_EMAIL_ADDRESS
 
-            if [[ -z "EMAIL_ADDRESS" ]]; then
+            if [[ -z "TEMP_EMAIL_ADDRESS" ]]; then
                 echo -e "\nSie haben keine E-Mail-Adresse eingegeben. Bitte versuchen Sie es erneut."
             else
                 break  # Gültige Auswahl und E-Mail-Adresse, Schleife verlassen
@@ -175,8 +187,8 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
     echo "Lebenszeit der Zielpool-Snapshots: $DEST_SNAP_LIFETIME"
 
     # Ausgabe der E-Mail-Adresse, Wenn diese definiert wurde
-    if [[ -n "$EMAIL_ADDRESS" ]]; then
-        echo "E-Mail-Adresse: $EMAIL_ADDRESS"
+    if [[ -n "$TEMP_EMAIL_ADDRESS" ]]; then
+        echo "E-Mail-Adresse: $TEMP_EMAIL_ADDRESS"
     fi
 
     # Bestätigen der Eingaben
@@ -205,8 +217,8 @@ if [ "$CONFIG_MODE" = true ] || [ ! -f "$FIRST_RUN_FLAG" ]; then
     echo "SNAPCHECK=\"$SNAPCHECK\"" >> "$CONFIG_FILE"
     echo "SOURCE_SNAP_LIFETIME=\"$SOURCE_SNAP_LIFETIME\"" >> "$CONFIG_FILE"
     echo "DEST_SNAP_LIFETIME=\"$DEST_SNAP_LIFETIME\"" >> "$CONFIG_FILE"
-    if [[ -n "$EMAIL_ADDRESS" ]]; then
-        echo "EMAIL_ADDRESS=\"$EMAIL_ADDRESSE\"" >> "$CONFIG_FILE"
+    if [[ -n "$TEMP_EMAIL_ADDRESS" ]]; then
+        echo "EMAIL_ADDRESS=\"$TEMP_EMAIL_ADDRESS\"" >> "$CONFIG_FILE"
     fi
 
     # Erstelle Log-Verzeichnis
